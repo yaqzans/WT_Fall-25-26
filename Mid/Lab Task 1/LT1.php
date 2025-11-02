@@ -42,15 +42,16 @@ Confirm Password:<br>
 </body>
 <style>
 div{
-    border: 2px solid black;
+    border: 1px solid black;
     width: 350px;
     padding: 10px;
-    background-color: Cornsilk;
+    background-color: OldLace;
 }
 .left{
     text-align: left;
     align: left;
     font-weight: bold;
+    font-family: Arial;
 }
 .w{
     width: 340px;
