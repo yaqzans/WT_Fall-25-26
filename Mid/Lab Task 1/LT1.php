@@ -52,6 +52,7 @@ div{
     align: left;
     font-weight: bold;
     font-family: Arial;
+    font-size: 14px;
 }
 .w{
     width: 340px;
