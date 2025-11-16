@@ -107,6 +107,14 @@ div{
 h1{
     background-color: #a8efffff;
 }
+button{
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
 </style>
 </body>
 </html>
