@@ -9,6 +9,7 @@
 <h2>NeedSurveyResponses</h2>
 </header>
 <main>
+<section>
 <div id = "box">
 <h3>My Profile</h3>
 <p><b>Name:</b> Student</p>
@@ -26,10 +27,10 @@
 <b>Learning Habits Survey</b><br>
 <span id="meta">Responses: 10 / 10 (Closed)</span>
 </div>
-
+</section>
 <footer>
 Contact us:
-<a href="mailto:shamvi.abdullah@gmail.com">Mail</a>
+<a href="mailto:shamvi.abdullah@gmail.com">click here</a>
 </footer>
 
 <style>
@@ -37,6 +38,11 @@ body {
     margin: 0;
     font-family: Arial, sans-serif;
     background-color: #f4f5fb;
+}
+section{
+    max-width: 800px;
+    margin: auto;
+    padding: 20px;
 }
 #btn {
     background: white;
@@ -54,30 +60,33 @@ body {
     color: white;
 }
 #box {
-    background-color: white;
+    background: white;
     padding: 20px;
-    margin: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    margin-bottom: 20px;
 }
 #surveyItem {
-    margin-top: 10px;
+    background: #f7f7ff;
     padding: 10px;
-    border-bottom: 1px solid #eee;
+    border-radius: 6px;
+    margin-bottom: 10px;
 }
 #meta {
     color: gray;
-    font-size: 14px;
+    font-size: 13px;
 }
 footer {
     text-align: center;
     padding: 15px;
-    background-color: #f4f5fb;
-    margin-top: 20px;
-    postion : relative;
-    bottom : 0;
+    background: white;
+    border-top: 1px solid #ddd;
+    position: relative;
+    bottom: 3px;
 }
-
+#footer a {
+    color: #5b4df5;
+    text-decoration: none;
+}
 
 </body>
 </html>
