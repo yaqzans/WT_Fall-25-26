@@ -51,12 +51,12 @@ section{
     border-radius: 6px;
     cursor: pointer;
 }
-#header {
+header {
     display: flex;
     align-items: center;
     gap: 15px;
     padding: 15px 30px;
-    background: linear-gradient(to right, #7b6cf6, #8f7df7);
+    background: #7b6cf6;
     color: white;
 }
 #box {
