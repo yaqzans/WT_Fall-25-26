@@ -7,6 +7,7 @@
 <header> 
 <button id = "btn">← Back </button>
 <h2>NeedSurveyResponses</h2>
+<button id = "logout">Logout</button>
 </header>
 <main>
 <section>
@@ -65,6 +66,17 @@ header {
     border-radius: 10px;
     margin-bottom: 20px;
 }
+#logout {
+    background: white;
+    border: none;
+    padding: 9px 18px;
+    border-radius: 6px;
+    cursor: pointer;
+    position: absolute;
+    right: 30px;
+    font-size: 16px;
+}
+
 #surveyItem {
     background: #f7f7ff;
     padding: 10px;
