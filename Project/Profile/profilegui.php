@@ -80,8 +80,9 @@ footer {
     padding: 15px;
     background: white;
     border-top: 1px solid #ddd;
-    position: relative;
-    bottom: 3px;
+    position: absolute;
+    bottom: 0px;
+    width: 98.3%;
 }
 #footer a {
     color: #5b4df5;
