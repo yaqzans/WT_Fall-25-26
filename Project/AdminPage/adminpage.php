@@ -5,14 +5,34 @@
 </head>
 
 <body>
+
 <header> 
 <button id="btn">← Back</button>
 <h2>NeedSurveyResponses</h2>
 </header>
 
-<main>
+<section>
 
-</main>
+<div id="box">
+    <h3>Userbase</h3>
+    <p>Total Users: 128</p>
+    <button id="btncol">See More</button>
+</div>
+
+<div id="box">
+    <h3>Campaigns</h3>
+    <p>Total Campaigns: 42</p>
+    <button id="btncol">See More</button>
+</div>
+
+<div id="box">
+    <h3>Make Announcement</h3>
+    Announcement Message:<br>
+    <textarea rows="4" style="width:98%;"></textarea><br><br>
+    <button id="btncol">Post Announcement</button>
+</div>
+
+</section>
 
 <footer>
 Contact us:
@@ -43,9 +63,36 @@ header {
     cursor: pointer;
 }
 
+section {
+    max-width: 800px;
+    margin: auto;
+    padding: 20px;
+}
+
+#box {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+textarea {
+    padding: 6px;
+    font-family: Arial;
+}
+
+#btncol {
+    background: #7b6cf6;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
 footer {
     text-align: center;
-    padding: 15px;
+    padding: 10px;
     background: white;
     border-top: 1px solid #ddd;
     position: fixed;
