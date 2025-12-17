@@ -104,7 +104,7 @@ footer {
     border-top: 1px solid #ddd;
     position: fixed;
     bottom: 0px;
-    width: 98.3%;
+    width: 99%;
     font-size: 12px;
 }
 

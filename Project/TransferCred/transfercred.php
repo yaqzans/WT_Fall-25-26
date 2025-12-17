@@ -85,7 +85,7 @@ footer {
     border-top: 1px solid #ddd;
     position: fixed;
     bottom: 0;
-    width: 98.7%;
+    width: 99%;
     font-size: 12px;
 }
 
