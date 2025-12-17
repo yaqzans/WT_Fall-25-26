@@ -5,26 +5,24 @@
 </head>
 
 <body>
-
 <header> 
 <button id="btn">← Back</button>
 <h2>NeedSurveyResponses</h2>
 </header>
 
 <section>
-
-<div id="box">
-    <h3>Userbase</h3>
-    <p>Total Users: 128</p>
-    <button id="btncol">See More</button>
+<div id="row">
+    <div id="box">
+        <h3>Userbase</h3>
+        <p>Total Users: 128</p>
+        <button id="btncol">See More</button>
+    </div>
+    <div id="box">
+        <h3>Campaigns</h3>
+        <p>Total Campaigns: 42</p>
+        <button id="btncol">See More</button>
+    </div>
 </div>
-
-<div id="box">
-    <h3>Campaigns</h3>
-    <p>Total Campaigns: 42</p>
-    <button id="btncol">See More</button>
-</div>
-
 <div id="box">
     <h3>Make Announcement</h3>
     Announcement Message:<br>
@@ -67,6 +65,15 @@ section {
     max-width: 800px;
     margin: auto;
     padding: 20px;
+}
+
+#row {
+    display: flex;
+    gap: 20px;
+}
+
+#row #box {
+    width: 50%;
 }
 
 #box {
