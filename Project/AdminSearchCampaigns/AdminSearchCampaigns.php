@@ -45,9 +45,7 @@
             </div>
         </div>
     </div>
-</section>
-
-<div id="right">
+    <div id="right">
         <div id="box">
             <h3>Transactions</h3>
             <div id="transactionItem">
