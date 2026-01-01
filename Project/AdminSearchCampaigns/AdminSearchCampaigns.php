@@ -1,5 +1,12 @@
 <?php
 include "../db.php";
+
+$result = mysqli_query($conn, "SELECT * FROM campaigns");
+
+if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['cid']) && $_GET['cid'] != "") {
+    $cid = $_GET['cid'];
+    $result = mysqli_query($conn, "SELECT * FROM campaigns WHERE id = $cid");
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -16,36 +23,24 @@ include "../db.php";
 
 <section>
 <div id="searchBox">
-    <input type="text" placeholder="Search by Survey ID">
+    <form method="get">
+        <input type="text" name="cid" placeholder="Search by Campaign ID">
+    </form>
 </div>
 <div id="layout">
     <div id="left">
         <div id="box">
             <h3>Surveys</h3>
-            <div id="surveyItem">
-                <b>Survey ID:</b> 101<br>
-                <span id="meta">Status: Open</span><br>
-                <span id="meta">Responses: 4 / 10</span><br>
-                <span id="meta">Date: 13/03/25</span>
-            </div>
-            <div id="surveyItem">
-                <b>Survey ID:</b> 102<br>
-                <span id="meta">Status: Closed</span><br>
-                <span id="meta">Responses: 10 / 10</span><br>
-                <span id="meta">Date: 10/03/25</span>
-            </div>
-            <div id="surveyItem">
-                <b>Survey ID:</b> 103<br>
-                <span id="meta">Status: Closed</span><br>
-                <span id="meta">Responses: 8 / 8</span><br>
-                <span id="meta">Date: 08/03/25</span>
-            </div>
-                <div id="surveyItem">
-                <b>Survey ID:</b> 105<br>
-                <span id="meta">Status: Closed</span><br>
-                <span id="meta">Responses: 6 / 10</span><br>
-                <span id="meta">Date: 31/01/25</span>
-            </div>
+            <?php
+            while ($row = mysqli_fetch_assoc($result)) {
+                    echo '<div id="surveyItem">';
+                    echo '<b>Survey ID:</b> ' . $row['id'] . '<br>';
+                    echo '<span id="meta">Status: ' . $row['status'] . '</span><br>';
+                    echo '<span id="meta">Responses: ' . $row['responses_served'] . ' / ' . $row['responses_needed'] . '</span><br>';
+                    echo '<span id="meta">Date: ' . $row['created_at'] . '</span>';
+                    echo '</div>';
+                }
+            ?> 
         </div>
     </div>
     <div id="right">
