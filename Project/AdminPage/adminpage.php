@@ -1,5 +1,11 @@
 <?php
 include "../db.php";
+$res_users = mysqli_query($conn, "SELECT COUNT(*) AS total FROM users");
+$row_users = mysqli_fetch_assoc($res_users);
+$total_users = $row_users['total'];
+$res_campaigns = mysqli_query($conn, "SELECT COUNT(*) AS total FROM campaigns");
+$row_campaigns = mysqli_fetch_assoc($res_campaigns);
+$total_campaigns = $row_campaigns['total'];
 ?>
 <!DOCTYPE html>
 <html>
@@ -18,12 +24,12 @@ include "../db.php";
 <div id="row">
     <div id="box">
         <h3>Userbase</h3>
-        <p>Total Users: 128</p>
+        <p>Total Users: <?php echo $total_users; ?></p>
         <button id="btncol">See More</button>
     </div>
     <div id="box">
         <h3>Campaigns</h3>
-        <p>Total Campaigns: 42</p>
+        <p>Total Campaigns: <?php echo $total_campaigns; ?></p>
         <button id="btncol">See More</button>
     </div>
 </div>
