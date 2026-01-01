@@ -42,18 +42,20 @@ $camp_res = mysqli_query($conn, "SELECT * FROM campaigns WHERE user_id = $uid");
 
 <div id="box">
 <h3>Survey History</h3>
-
-<div id="surveyItem">
-<b>Research Topic Selection Poll</b><br>
-<span id="meta">Status: Active</span><br>
-<span id="meta">Responses: 3 / 10</span>
-</div>
-
-<div id="surveyItem">
-<b>Learning Habits Survey</b><br>
-<span id="meta">Status: Closed</span><br>
-<span id="meta">Responses: 10 / 10</span>
-</div>
+<?php
+while ($row = mysqli_fetch_assoc($camp_res)) 
+{
+    echo '<div id="surveyItem">';
+    echo '<b>' . $row['title'] . '</b><br>';
+    echo '<span id="meta">Status: ' . $row['status'] . '</span><br>';
+    echo '<span id="meta">Responses: ' . $row['responses_served'] . ' / ' . $row['responses_needed'] . '</span>';
+    echo '</div>';
+}
+if (mysqli_num_rows($camp_res) == 0) 
+{
+    echo '<span id="meta">No surveys created</span>';
+}
+?>
 </div>
 
 </section>
