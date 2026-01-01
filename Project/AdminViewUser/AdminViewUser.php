@@ -14,7 +14,9 @@ $uid = $_GET['id'];
 
 <body>
 <header> 
-<button id="btn">← Back</button>
+<a href="../AdminSearchUser/adminsearchuser.php">
+    <button id="btn">← Back</button>
+</a>
 <h2>NeedSurveyResponses</h2>
 </header>
 
