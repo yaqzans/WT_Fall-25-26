@@ -7,6 +7,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['cid']) && $_GET['cid'] !
     $cid = $_GET['cid'];
     $result = mysqli_query($conn, "SELECT * FROM campaigns WHERE id = $cid");
 }
+$result1 = mysqli_query($conn, "SELECT * FROM ledger ORDER BY created_at DESC");
 ?>
 <!DOCTYPE html>
 <html>
@@ -46,21 +47,24 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['cid']) && $_GET['cid'] !
     <div id="right">
         <div id="box">
             <h3>Transactions</h3>
-            <div id="transactionItem">
-                User ID: 112<br>
-                Survey ID: 101<br>
-                Credits: +1
-            </div>
-            <div id="transactionItem">
-                User ID: 117<br>
-                Survey ID: 101<br>
-                Credits: +1
-            </div>
-            <div id="transactionItem">
-                User ID: 109<br>
-                Survey ID: 101<br>
-                Credits: +1
-            </div>
+            <?php
+            while ($t = mysqli_fetch_assoc($result1)) {
+                echo '<div id="transactionItem">';
+                if ($t['sender_id'] == NULL) 
+                {
+                    echo 'System → User ' . $t['receiver_id'] . '<br>';
+                } 
+                else if ($t['receiver_id'] == NULL) {
+                    echo 'User ' . $t['sender_id'] . ' spent credits<br>';
+                } 
+                else {
+                    echo 'User ' . $t['sender_id'] . ' → User ' . $t['receiver_id'] . '<br>';
+                }
+                echo '<span id="meta">Credits:</span> ' . $t['amount'] . '<br>';
+                echo '<span id="meta">Date:</span> ' . $t['created_at'];
+                echo '</div>';
+            }
+            ?>
         </div>
     </div>
 </div>
