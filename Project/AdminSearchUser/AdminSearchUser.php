@@ -1,6 +1,13 @@
 <?php
 include "../db.php";
+$result = mysqli_query($conn, "SELECT * FROM users");
+
+if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['uid']) && $_GET['uid'] != "") {
+    $uid = $_GET['uid'];
+    $result = mysqli_query($conn, "SELECT * FROM users WHERE id = $uid");
+}
 ?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,22 +23,20 @@ include "../db.php";
 
 <section>
 <div id="searchBox">
-    <input type="text" placeholder="Search by User ID">
+    <form method="get">
+        <input type="text" name="uid" placeholder="Search by User ID">
+    </form>
 </div>
+
 <div id="box">
     <h3>Users</h3>
-    <div id="userItem">
-        User ID: 101
-    </div>
-    <div id="userItem">
-        User ID: 102
-    </div>
-    <div id="userItem">
-        User ID: 103
-    </div>
-    <div id="userItem">
-        User ID: 104
-    </div>
+<?php
+while ($row = mysqli_fetch_assoc($result)) {
+    echo '<div id="userItem">';
+    echo 'User ID: ' . $row['id'];
+    echo '</div>';
+}
+?>
 </div>
 
 </section>
