@@ -4,6 +4,38 @@ if (!isset($_GET['id'])) {
     die("User not found"); 
 }
 $uid = $_GET['id'];
+$amount = "";
+$creditError = "";
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") //Empty error method does not work, I have tried
+{
+    if (empty($_POST["amount"])) 
+    {
+        $creditError = "Amount required";
+    } 
+    else {
+        $amount = (int)$_POST["amount"];
+        if ($amount <= 0) {
+    $creditError = "Amount must be greater than 0";
+}
+else {
+
+    if ($_POST["action"] == "add") 
+    {
+        mysqli_query($conn, "UPDATE profiles SET credits = credits + $amount WHERE user_id = $uid");
+        mysqli_query($conn, "INSERT INTO ledger (sender_id, receiver_id, amount) VALUES (NULL, $uid, $amount)"
+        );
+    }
+
+    if ($_POST["action"] == "remove") {
+        mysqli_query($conn, "UPDATE profiles SET credits = credits - $amount WHERE user_id = $uid");
+        mysqli_query($conn, "INSERT INTO ledger (sender_id, receiver_id, amount) VALUES ($uid, NULL, $amount)");
+    }
+}
+}
+
+    $amount = "";
+}
 $user_res = mysqli_query($conn, "SELECT * FROM users WHERE id = $uid"); //This is for general info
 $user = mysqli_fetch_assoc($user_res);
 $profile_res = mysqli_query($conn, "SELECT * FROM profiles WHERE user_id = $uid"); //This is for profile info
@@ -24,22 +56,22 @@ $camp_res = mysqli_query($conn, "SELECT * FROM campaigns WHERE user_id = $uid");
 </a>
 <h2>NeedSurveyResponses</h2>
 </header>
-
 <main>
 <section>
-
 <div id="box">
 <h3>User Profile</h3>
-
 <p><b>User ID:</b> <span id="id"><?php echo $user['id']; ?></span></p>
 <p><b>Email:</b> <?php echo $user['email']; ?></p>
 <p><b>Current Credits:</b> <span id="credits"><b><?php echo $profile['credits']; ?></b></span></p>
-
-<button id="btncol">Add Credits</button>
-<button id="btncol">Remove Credits</button>
-<button style="background:red; color:white; cursor:pointer;">Delete User</button>
+<form method="post">
+    <input type="number" name="amount" value="<?php echo $amount; ?>" placeholder="Credits">
+    <?php echo $creditError; ?>
+    <br><br>
+    <button id="btncol" name="action" value="add">Add Credits</button>
+    <button id="btncol" name="action" value="remove">Remove Credits</button>
+    <button style="background:red; color:white; cursor:pointer;">Delete User</button>
+</form>
 </div>
-
 <div id="box">
 <h3>Survey History</h3>
 <?php
@@ -57,10 +89,8 @@ if (mysqli_num_rows($camp_res) == 0)
 }
 ?>
 </div>
-
 </section>
 </main>
-
 <footer>
 Contact us:
 <a href="mailto:shamvi.abdullah@gmail.com">click here</a>
