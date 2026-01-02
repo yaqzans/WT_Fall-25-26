@@ -1,6 +1,50 @@
 <?php
 include "../db.php";
+
+$sender_id = 1;   // temporary sender
+$error = "";
+
+$sender_res = mysqli_query($conn, "SELECT * FROM profiles WHERE user_id = $sender_id");
+$sender = mysqli_fetch_assoc($sender_res);
+
+if ($_SERVER["REQUEST_METHOD"] == "POST")
+{
+    if (empty($_POST["receiver1"]) || empty($_POST["receiver2"]) || empty($_POST["amount"]))
+    {
+        $error = "All fields required";
+    }
+    else
+    {
+        $receiver1 = $_POST["receiver1"];
+        $receiver2 = $_POST["receiver2"];
+        $amount = (int)$_POST["amount"];
+
+        if ($receiver1 != $receiver2)
+        {
+            $error = "Receiver IDs do not match";
+        }
+        else if ($amount <= 0)
+        {
+            $error = "Amount must be greater than 0";
+        }
+        else if ($receiver1 == $sender_id)
+        {
+            $error = "You cannot transfer credits to yourself";
+        }
+        else if ($sender["credits"] < $amount)
+        {
+            $error = "Not enough credits";
+        }
+        else
+        {
+            mysqli_query($conn,"UPDATE profiles SET credits = credits - $amount WHERE user_id = $sender_id");
+            mysqli_query($conn,"UPDATE profiles SET credits = credits + $amount WHERE user_id = $receiver1");
+            mysqli_query($conn,"INSERT INTO ledger (sender_id, receiver_id, amount) VALUES ($sender_id, $receiver1, $amount)");
+        }
+    }
+}
 ?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,17 +59,23 @@ include "../db.php";
 <section>
 <div id="box">
 <h3>Transfer Credits</h3>
-<p>User ID: <b id = "uid">XYZ</b><span style="margin-left: 15px;">Credits: <b>42</b></p>
+<form method="post">
+<p>
+User ID: <b id="uid"><?php echo $sender_id; ?></b>
+<span style="margin-left: 15px;">
+Credits: <b><?php echo $sender["credits"]; ?></b>
+</span>
+</p>
+
 Receiver User ID:<br>
-<input type="text" style="width: 300px;" placeholder="Enter user ID"><br><br>
-
+<input type="text" name="receiver1" style="width: 300px;"><br><br>
 Confirm Receiver ID:<br>
-<input type="text" style="width: 300px;" placeholder="Re-enter user ID"><br><br>
-
+<input type="text" name="receiver2" style="width: 300px;"><br><br>
 Amount to Transfer:<br>
-<input type="number" style="width: 170px;" placeholder="Enter transfer amount"><br><br>
-
+<input type="number" name="amount" style="width: 170px;"><br><br>
 <button id="btncol">Confirm Transfer</button>
+<?php echo "<span style='color:red;'>$error</span>"; ?>
+</form>
 </div>
 </section>
 <footer>
