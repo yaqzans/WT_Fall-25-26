@@ -20,7 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
         mysqli_query($conn, "DELETE FROM users WHERE id = $uid");
         $userDeleted = true;
     }
-    if (empty($_POST["amount"])) 
+    if (empty($_POST["amount"]) && $_POST["action"] != "delete") 
     {
         $creditError = "Amount required";
     }
