@@ -1,5 +1,12 @@
 <?php
 include "../db.php";
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["delete_campaign"])) 
+{
+    $cid = $_POST["delete_campaign"];
+
+    mysqli_query($conn, "DELETE FROM sessions WHERE campaign_id = $cid");
+    mysqli_query($conn, "DELETE FROM campaigns WHERE id = $cid");
+}
 $result = mysqli_query($conn, "SELECT * FROM campaigns");
 if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['cid']) && $_GET['cid'] != "") 
 {
@@ -41,7 +48,9 @@ $result1 = mysqli_query($conn, "SELECT * FROM ledger ORDER BY created_at DESC");
                     echo '<span id="meta">Status: ' . $row['status'] . '</span><br>';
                     echo '<span id="meta">Responses: ' . $row['responses_served'] . ' / ' . $row['responses_needed'] . '</span><br>';
                     echo '<span id="meta">Date: ' . $row['created_at'] . '</span>';
-                    echo '<button name="delete_campaign">Delete Survey</button>';
+                    echo '<form method="post">';
+                    echo '<button style="background: #e74c3c; color: white; border: none; padding: 6px 10px; border-radius: 4px; cursor: pointer; font-size: 12px; margin-top: 6px;" name="delete_campaign" value="' . $row['id'] . '">Delete Survey</button>';
+                    echo '</form>';
                     echo '</div>';
                 }
             ?> 
